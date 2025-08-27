@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bonifasius Sinurat - Data Scientist Portfolio</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+  --text-primary: #2d3748;
+  --text-secondary: #4a5568;
+  --bg-light: #f8fafc;
+  --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-heavy: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  padding-top: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Modern Navbar */
+.navbar {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-link {
+  color: var(--text-primary) !important;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #667eea !important;
+  transform: translateY(-2px);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background: var(--primary-gradient);
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Hero Section */
+.hero-section {
+  min-height: 100vh;
+  background: var(--primary-gradient);
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="200" height="200" fill="url(%23dots)"/></svg>');
+  animation: float 30s ease-in-out infinite;
+}
+
+.hero-section::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    linear-gradient(45deg, transparent 48%, rgba(255, 255, 255, 0.03) 49%, rgba(255, 255, 255, 0.03) 51%, transparent 52%),
+    linear-gradient(-45deg, transparent 48%, rgba(255, 255, 255, 0.03) 49%, rgba(255, 255, 255, 0.03) 51%, transparent 52%);
+  background-size: 40px 40px, 40px 40px;
+  animation: shimmer 40s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(1deg); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-weight: 300;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.cta-button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 12px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  display: inline-block;
+}
+
+.cta-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+/* About Section */
+.about-section {
+  padding: 100px 0;
+  background: var(--bg-light);
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-image {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: var(--shadow-heavy);
+  transition: all 0.3s ease;
+  border: 5px solid white;
+}
+
+.about-image:hover {
+  transform: scale(1.05) rotate(3deg);
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3);
+}
+
+.about-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+/* Projects Section */
+.projects-section {
+  padding: 100px 0;
+  background: white;
+}
+
+.project-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-light);
+  transition: all 0.3s ease;
+  border: none;
+  height: 100%;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-heavy);
+}
+
+.project-card .card-img-top {
+  height: 200px;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.project-card .card-body {
+  padding: 2rem;
+}
+
+.project-card .card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.project-card .card-text {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.btn-modern {
+  background: var(--primary-gradient);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.btn-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  color: white;
+}
+
+.btn-secondary-modern {
+  background: transparent;
+  border: 2px solid #667eea;
+  color: #667eea;
+  padding: 8px 18px;
+  border-radius: 25px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.btn-secondary-modern:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Skills Section */
+.skills-section {
+  padding: 100px 0;
+  background: var(--bg-light);
+}
+
+.skill-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-light);
+  transition: all 0.3s ease;
+  border: none;
+  height: 100%;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
+}
+
+.skill-icon {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.skill-card:hover .skill-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.skill-card h5 {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.skill-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Contact Section */
+.contact-section {
+  padding: 100px 0;
+  background: var(--dark-gradient);
+  color: white;
+  text-align: center;
+}
+
+.contact-section .section-title {
+  color: white;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.contact-info {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.contact-info i {
+  margin-right: 10px;
+  color: #667eea;
+}
+
+.social-links {
+  margin-top: 2rem;
+}
+
+.social-link {
+  display: inline-block;
+  margin: 0 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px);
+  color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.social-link i {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.social-link span {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 80vh;
+  }
+  
+  .about-section, .projects-section, .skills-section, .contact-section {
+    padding: 60px 0;
+  }
+  
+  .about-image {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .project-card .card-body {
+    padding: 1.5rem;
+  }
+  
+  .skill-card {
+    padding: 1.5rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Modern Navigation -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#home">Portfolio</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#projects">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#skills">Skills</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="hero-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="hero-content fade-in">
+          <h1 class="hero-title">Bonifasius Sinurat</h1>
+          <p class="hero-subtitle">
+            Blending Marketing Experience with Data Science <br>
+            Python, SQL, and Analytics <br>
+            Turning Data into Insights
+          </p>
+          <a href="#about" class="cta-button">
+            <i class="fas fa-arrow-down me-2"></i>
+            Discover My Journey
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="about-section">
+  <div class="container">
+    <h2 class="section-title fade-in">About Me</h2>
+    <div class="row align-items-center">
+      <div class="col-lg-4 text-center mb-4 mb-lg-0">
+        <img src="images/about/1.jpg" alt="Bonifasius Sinurat" class="about-image fade-in">
+      </div>
+      <div class="col-lg-8">
+        <div class="about-text fade-in">
+          <p class="lead">Hi, I'm Bonifasius Sinurat, an aspiring Data Scientist with a passion for transforming raw data into meaningful insights that drive real-world impact.</p>
+          <p class="lead">With a strong foundation in Python, SQL, and data analysis, I specialize in building innovative solutions that bridge the gap between complex data and actionable business intelligence. My journey in data science is fueled by curiosity and a commitment to continuous learning.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="projects-section">
+  <div class="container">
+    <h2 class="section-title fade-in">Featured Projects</h2>
+    <div class="row">
+      <!-- Project 1 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card project-card fade-in">
+          <img src="images/projects/1.jpg" class="card-img-top" alt="NLP Sentiment Analysis">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">NLP Sentiment Analysis - Amazon Reviews</h5>
+            <p class="card-text">Advanced NLP pipeline for Amazon review classification using TF-IDF vectorization and Multinomial Naive Bayes, demonstrating the power of machine learning in understanding customer sentiment.</p>
+            <div class="mt-auto">
+              <a href="https://github.com/bonifasiusx/nlp-sentiment-analysis-amazon-reviews" class="btn-modern">
+                <i class="fab fa-github me-2"></i>Repository
+              </a>
+              <a href="https://medium.com/@bonifasiusx/letting-machines-listen-my-take-on-amazon-review-sentiment-analysis-9d2831210dc9" class="btn-secondary-modern">
+                <i class="fab fa-medium me-2"></i>Article
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Project 2 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card project-card fade-in">
+          <img src="images/projects/2.jpg" class="card-img-top" alt="Housing Price Prediction">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">California Housing Price Prediction</h5>
+            <p class="card-text">Sophisticated regression model using 1990 California census data with CatBoost algorithm, achieving superior performance for real estate ROI analysis and price negotiation strategies.</p>
+            <div class="mt-auto">
+              <a href="https://github.com/bonifasiusx/capstone-machine-learning" class="btn-modern">
+                <i class="fab fa-github me-2"></i>Repository
+              </a>
+              <a href="https://capstone-california-housing-price-predictor.streamlit.app/" class="btn-secondary-modern">
+                <i class="fas fa-external-link-alt me-2"></i>Live App
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Project 3 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card project-card fade-in">
+          <img src="images/projects/3.jpg" class="card-img-top" alt="Customer Segmentation">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Customer Segmentation with LRFM Analysis</h5>
+            <p class="card-text">Comprehensive customer segmentation using Length, Recency, Frequency, and Monetary metrics with K-Means clustering for targeted marketing and retention strategies.</p>
+            <div class="mt-auto">
+              <a href="https://github.com/bonifasiusx/lrfm-analysis-online-retail-store" class="btn-modern">
+                <i class="fab fa-github me-2"></i>Repository
+              </a>
+              <a href="https://medium.com/@bonifasiusx/segmenting-retail-customers-using-lrfm-and-k-means-clustering-61f4f47daa32" class="btn-secondary-modern">
+                <i class="fab fa-medium me-2"></i>Article
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Project 4 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card project-card fade-in">
+          <img src="images/projects/4.jpg" class="card-img-top" alt="TransJakarta Analysis">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">TransJakarta Passenger Flow Analysis</h5>
+            <p class="card-text">In-depth analysis of Jakarta's public transportation data combining statistical methods with interactive Tableau dashboards to optimize fleet scheduling and route efficiency.</p>
+            <div class="mt-auto">
+              <a href="https://github.com/bonifasiusx/capstone-data-analysis" class="btn-modern">
+                <i class="fab fa-github me-2"></i>Repository
+              </a>
+              <a href="https://public.tableau.com/app/profile/bonifasius.sinurat/viz/capstone_m2_dashboard/Dashboard1" class="btn-secondary-modern">
+                <i class="fas fa-chart-line me-2"></i>Dashboard
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Project 5 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card project-card fade-in">
+          <img src="images/projects/5.jpg" class="card-img-top" alt="Student Management System">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Student Management System</h5>
+            <p class="card-text">
+              Full-featured console application with role-based authentication, CRUD operations, soft delete functionality, and analytical insights for educational data management.
+            </p>
+            <div class="mt-auto">
+              <a href="https://github.com/bonifasiusx/capstone-python-crud" class="btn-modern">
+                <i class="fab fa-github me-2"></i>Repository
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="skills-section">
+  <div class="container">
+    <h2 class="section-title fade-in">Technical Skills</h2>
+    <div class="row">
+      <!-- Skill 1 -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="skill-card fade-in">
+          <img src="images/skills/1.png" class="skill-icon" alt="Python">
+          <h5>Python</h5>
+          <p>Advanced proficiency in Python for data science, featuring expertise in Pandas, NumPy, Scikit-learn, and building scalable machine learning pipelines.</p>
+        </div>
+      </div>
+      
+      <!-- Skill 2 -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="skill-card fade-in">
+          <img src="images/skills/2.png" class="skill-icon" alt="Data Visualization">
+          <h5>Data Visualization</h5>
+          <p>Creating compelling visual narratives using Tableau, Matplotlib, and Seaborn to transform complex data into actionable business insights.</p>
+        </div>
+      </div>
+      
+      <!-- Skill 3 -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="skill-card fade-in">
+          <img src="images/skills/3.png" class="skill-icon" alt="SQL">
+          <h5>SQL</h5>
+          <p>Expert-level SQL skills for complex data extraction, transformation, and analysis using MySQL and Google BigQuery in enterprise environments.</p>
+        </div>
+      </div>
+      
+      <!-- Skill 4 -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="skill-card fade-in">
+          <img src="images/skills/4.png" class="skill-icon" alt="Machine Learning">
+          <h5>Machine Learning</h5>
+          <p>Hands-on experience with supervised and unsupervised algorithms, focusing on model interpretability and solving real-world business challenges.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tools & Platforms Section -->
+<section id="tools" class="skills-section">
+  <div class="container">
+    <h2 class="section-title fade-in">Tools & Platforms</h2>
+    <div class="row">
+
+      <!-- VS Code -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="skill-card fade-in">
+          <img src="images/platform/vscode.png" class="skill-icon" alt="VS Code">
+          <h5>VS Code</h5>
+          <p>Main IDE for Python/SQL with extensions for linting, debugging, and notebooks.</p>
+        </div>
+      </div>
+
+      <!-- Jupyter Notebook -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="skill-card fade-in">
+          <img src="images/platform/jupyter.png" class="skill-icon" alt="Jupyter Notebook">
+          <h5>Jupyter Notebook</h5>
+          <p>Interactive environment for exploration, EDA, visualization, and ML experiments.</p>
+        </div>
+      </div>
+
+      <!-- Tableau -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="skill-card fade-in">
+          <img src="images/platform/tableau.png" class="skill-icon" alt="Tableau">
+          <h5>Tableau</h5>
+          <p>Business intelligence dashboards to communicate trends and KPIs to stakeholders.</p>
+        </div>
+      </div>
+
+      <!-- Streamlit -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="skill-card fade-in">
+          <img src="images/platform/streamlit.png" class="skill-icon" alt="Streamlit">
+          <h5>Streamlit</h5>
+          <p>Rapid data app prototyping and deployment directly from Python scripts.</p>
+        </div>
+      </div>
+
+      <!-- MySQL -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="skill-card fade-in">
+          <img src="images/platform/mysql.png" class="skill-icon" alt="MySQL">
+          <h5>MySQL</h5>
+          <p>Relational database for schema design, querying, and performance-minded ETL.</p>
+        </div>
+      </div>
+
+      <!-- Google BigQuery -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="skill-card fade-in">
+          <img src="images/platform/bigquery.png" class="skill-icon" alt="Google BigQuery">
+          <h5>Google BigQuery</h5>
+          <p>Cloud data warehouse for large-scale SQL analytics and ELT workflows.</p>
+        </div>
+      </div>
+
+      <!-- GitHub -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="skill-card fade-in">
+          <img src="images/platform/github.png" class="skill-icon" alt="GitHub">
+          <h5>GitHub</h5>
+          <p>Version control, issues, and collaboration for reproducible, reviewable projects.</p>
+        </div>
+      </div>
+
+      <!-- Excel -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="skill-card fade-in">
+          <img src="images/platform/excel.png" class="skill-icon" alt="Excel">
+          <h5>Excel</h5>
+          <p>Quick analysis, pivot tables, and handoff-friendly reports for business users.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <h2 class="section-title fade-in">Let's Connect</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <div class="fade-in">
+          <p class="contact-info">
+            <i class="fas fa-envelope"></i>
+            bonifasiusx@gmail.com
+          </p>
+          <p class="contact-info">
+            <i class="fas fa-phone"></i>
+            +62811399913
+          </p>
+        </div>
+        
+        <div class="social-links fade-in">
+          <a href="https://www.linkedin.com/in/bonifasiusx/" target="_blank" class="social-link">
+            <i class="fab fa-linkedin-in"></i>
+            <span>LinkedIn</span>
+          </a>
+          <a href="https://github.com/bonifasiusx" target="_blank" class="social-link">
+            <i class="fab fa-github"></i>
+            <span>GitHub</span>
+          </a>
+          <a href="https://medium.com/@bonifasiusx" target="_blank" class="social-link">
+            <i class="fab fa-medium-m"></i>
+            <span>Medium</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// Smooth scrolling and animations
+document.addEventListener('DOMContentLoaded', function() {
+  // Intersection Observer for fade-in animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  // Observe all fade-in elements
+  document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Navbar background change on scroll
+  window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+      navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+      navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
+    } else {
+      navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+      navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+    }
+  });
+
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        const offsetTop = target.offsetTop - 80;
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>
