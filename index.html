@@ -407,6 +407,10 @@ html {
   transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
+  text-decoration: none;
+  display: block;
+  color: white;
+  cursor: pointer;
 }
 
 .contact-card::before {
@@ -421,8 +425,27 @@ html {
   transition: transform 0.4s ease;
 }
 
+.contact-card::after {
+  content: 'Click to contact';
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
 .contact-card:hover::before {
   transform: scaleX(1);
+}
+
+.contact-card:hover::after {
+  opacity: 1;
 }
 
 .contact-card:hover {
@@ -430,6 +453,8 @@ html {
   transform: translateY(-8px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   border-color: rgba(255, 255, 255, 0.25);
+  color: white;
+  text-decoration: none;
 }
 
 .contact-card i {
@@ -440,6 +465,11 @@ html {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   display: block;
+  transition: all 0.3s ease;
+}
+
+.contact-card:hover i {
+  transform: scale(1.1);
 }
 
 .contact-card h4 {
@@ -451,16 +481,11 @@ html {
   letter-spacing: 1px;
 }
 
-.contact-card p, .contact-card a {
+.contact-card p {
   font-size: 1.1rem;
   color: white;
-  text-decoration: none;
   font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.contact-card a:hover {
-  color: #667eea;
+  margin-bottom: 0;
 }
 
 .social-links {
